@@ -1,0 +1,38 @@
+#!/usr/bin/env node
+
+'use strict';
+
+const {
+  addCreateMutation,
+  addTriggerQuery,
+  addSearchQuery,
+  updateConfiguredOperations,
+  createMutationFile,
+  createQueryFile,
+  removeAllZapierFiles,
+  createExtensionFile,
+} = require('zapier-graphql');
+
+const doStuff = async () => {
+  updateConfiguredOperations();
+
+  // await addCreateMutation('addUnit');
+  // await addCreateMutation('addReference');
+  // await addSearchQuery('units');
+  // await addSearchQuery('tenants');
+  // await addTriggerQuery('states');
+  // await addTriggerQuery('plans');
+  // await addTriggerQuery('unitTypes');
+  // await addTriggerQuery('owners');
+  // await addTriggerQuery('countries');
+  // await addTriggerQuery('addressTypes');
+
+  // await createQueryFile('tenants');
+  // await createMutationFile('addUnit');
+
+  // removeAllZapierFiles();
+
+  // createExtensionFile('triggers', 'plans');
+}
+
+doStuff();
