@@ -14,6 +14,11 @@ zapier-graphql scaffold searches contacts && zapier push
 
 That's it.  This will generate a new GraphQL module in your project at, `./graphql/query/contacts.js`.  It will create an "extension module" within the standard [zapier-platform-cli](https://github.com/zapier/zapier-platform-cli) directrory, `./searches/contacts.js`.  It will import the extension module into your `index.js` entry file and register the new action with the `searches` export.  It will also generate a `./test/searches/contacts.js` test file for your new action.  Finally, the `zapier push` command will push the new action to your Zapier app.
 
+## Requirements
+
+- [Node.js](https://nodejs.org/en/) >= 18.3.0
+- [Zapier Platform CLI](https://github.com/zapier/zapier-platform/tree/main/packages/cli)
+
 ## Installation
 
 This lib can be installed globally, or locally.  We recommend installing it locally, so you can make use of the `utils` module as well.
