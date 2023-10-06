@@ -12,12 +12,15 @@
     ".": "./lib/index.js",
     "./lib/utils": "./lib/utils/index.js",
     "./package.json": "./package.json",
-    "./bin/jest": "./bin/zapier-graphql"
+    "./bin/zapier-graphql": "./bin/zapier-graphql"
   },
   "dependencies": {
+    "chalk": "^4.0.0",
+    "commander": "^11.0.0",
     "dotenv": "^16.3.1",
     "graphql": "^16.8.1",
     "inflection": "^3.0.0",
+    "inquirer": "^8.0.0",
     "undici": "^5.25.1",
     "uuid": "^9.0.1",
     "zapier-platform-cli": "15.3.0",
@@ -33,6 +36,7 @@
     "url": "https://github.com/rentpost/zapier-graphql.git"
   },
   "homepage": "https://github.com/rentpost/zapier-graphql",
+  "author": "Jacob Thomason; RentPost, Inc.",
   "license": "MIT",
   "keywords": [
     "zapier",
@@ -41,7 +45,6 @@
     "zapier-cli",
     "api"
   ],
-  "private": false,
   "publishConfig": {
     "access": "public"
   }
