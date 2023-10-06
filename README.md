@@ -30,8 +30,6 @@ npm install --save zapier-graphql
 zapier-graphql --help
 ```
 
-*I'm not really sure there is much needed to be said here.  The CLI is pretty self-explanatory.*
-
 ## Configuration
 
 Upon first use of the CLI app, you'll be prompted to create a `.zapiergraphql` config file.  This file is used to configure the CLI app and is required for use.  If you'd like to go ahead and generate one and configure it properly, just execute `zapier-graphql init`.
@@ -149,3 +147,19 @@ testBundle: {
   },
 }
 ```
+
+## Issues / Bugs / Questions
+
+Please feel free to raise an issue against this repository if you have any questions or problems.
+
+## Contributing
+
+New contributors to this project are welcome. PRs are open.
+
+## Authors and Maintainers
+
+- Jacob Thomason jacob@rentpost.com
+
+## License
+
+This library is released under the [Apache-2.0 license](https://github.com/rentpost/zapier-graphql/blob/master/LICENSE).
