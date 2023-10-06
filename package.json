@@ -10,8 +10,9 @@
   "bin": "./bin/zapier-graphql",
   "exports": {
     ".": "./lib/index.js",
-    "./lib/utils": "./lib/utils/index.js",
+    "./utils": "./lib/utils/index.js",
     "./package.json": "./package.json",
+    "./.zapiergraphql.sample": "./etc/.zapiergraphql.sample",
     "./bin/zapier-graphql": "./bin/zapier-graphql"
   },
   "dependencies": {

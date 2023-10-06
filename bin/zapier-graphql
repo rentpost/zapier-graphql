@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/env node --experimental-modules --no-warnings
 
 'use strict';
 
@@ -13,6 +13,7 @@ const {
   addTriggerQuery,
   addSearchQuery,
   updateConfiguredOperations,
+  createConfigFile,
   createMutationFile,
   createQueryFile,
   createAllOpreationFiles,
@@ -31,10 +32,32 @@ const error = (message) => {
 }
 
 
-const validate = () => {
+const validate = async () => {
   // Validate that we're in the correct directory
   if (!fs.existsSync(`${process.cwd()}/.zapierapprc`)) {
     error('You must run this script from the root of a Zapier CLI project (.zapierapprc not found).');
+  }
+
+  if (!fs.existsSync(`${process.cwd()}/.zapiergraphql`)) {
+    const confirmation = await inquirer.prompt([{
+      type: 'confirm',
+      name: 'confirm',
+      message: 'This looks like a new zapier-graphql project.  Would you like to initialize it?',
+      default: true,
+    }]);
+
+    if (!confirmation.confirm) {
+      process.exit(1);
+    }
+
+    const answers = await inquirer.prompt([{
+      type: 'input',
+      name: 'urlEnvVar',
+      message: 'What environment variable contains the GraphQL API URL?',
+      default: 'GRAPHQL_URL',
+    }]);
+
+    await createConfigFile(answers.urlEnvVar);
   }
 }
 
@@ -45,6 +68,12 @@ program
   .description('A CLI tool for generating and updating GraphQL files for Zapier Platform CLI.')
   .version(require(`${__dirname}/../package.json`).version);
 
+program.command('init')
+  .description('Initializes a new zapier-graphql project.')
+  .action(async () => {
+    await validate();
+  });
+
 // Configure all the scaffold sub-commands
 const scaffold = program.command('scaffold')
   .description(`Creates the necessary GraphQL operation file, Zapier extension file, test file, and
@@ -54,7 +83,7 @@ scaffold.command('triggers')
   .description('Scaffold a trigger query (must be a query).')
   .argument('<string>', 'The name of the GraphQL query (e.g. "contacts", "widget").')
   .action(async (queryName) => {
-    validate();
+    await validate();
     await addTriggerQuery(queryName);
   });
 
@@ -62,7 +91,7 @@ scaffold.command('creates')
   .description('Scaffold a create mutation (must be a mutation).')
   .argument('<string>', 'The name of the GraphQL mutation (e.g. "addContact", "doSomething").')
   .action(async (mutationName) => {
-    validate();
+    await validate();
     await addCreateMutation(mutationName);
   });
 
@@ -70,7 +99,7 @@ scaffold.command('searches')
   .description('Scaffold a search query (must be a query and have input fields).')
   .argument('<string>', 'The name of the GraphQL query (e.g. "contacts", "user").')
   .action(async (queryName) => {
-    validate();
+    await validate();
     await addSearchQuery(queryName);
   });
 
@@ -78,7 +107,7 @@ scaffold.command('searches')
 program.command('update')
   .description('Updates the base operations files (./graphql/*) configured in your Zapier app index.js.')
   .action(async () => {
-    validate();
+    await validate();
     await updateConfiguredOperations();
   });
 
@@ -89,21 +118,21 @@ const create = program.command('create')
 create.command('all')
   .description('Creates or updates all the GraphQL operation files in your API schema.')
   .action(async () => {
-    validate();
+    await validate();
     await createAllOpreationFiles();
   });
 
 create.command('query')
   .argument('<string>', 'The name of the GraphQL query (e.g. "contacts", "user").')
   .action(async (queryName) => {
-    validate();
+    await validate();
     await createQueryFile(queryName);
   });
 
 create.command('mutation')
   .argument('<string>', 'The name of the GraphQL mutation (e.g. "addContact", "doSomething").')
   .action(async (mutationName) => {
-    validate();
+    await validate();
     await createMutationFile(mutationName);
   });
 
@@ -124,7 +153,7 @@ isn't touched).`)
     }]);
 
     if (answers.confirm) {
-      validate();
+      await validate();
       await removeAllZapierFiles();
     }
   });

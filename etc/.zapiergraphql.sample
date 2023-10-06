@@ -1,0 +1,59 @@
+'use strict';
+
+require('dotenv').config();
+
+module.exports = {
+  request: {
+    urlEnvVar: '{{urlEnvVar}}', // Environment variable for the GraphQL API URL
+    headers: {
+      // Any custom headers you want to send with every request
+      // 'X-Requested-With': process.env.X_REQUESTED_WITH,
+    },
+  },
+
+  // See documentation for more information on scalar mapping.  This is just a starter list, please
+  // add and remove as needed.
+  scalarMap: {
+    Boolean: 'boolean',
+    Date: 'datetime',
+    DateTime: 'datetime',
+    Email: 'string',
+    Float: 'number',
+    ID: 'string',
+    Int: 'integer',
+    Json: 'string',
+    PhoneNumber: 'string',
+    String: 'string',
+    Timezone: 'string',
+    Url: 'string',
+  },
+
+  // Because Zapier requires that every reponse have an "id" field, we need a way to map certain
+  // output type fileds to be designated as the "id".  You could, of course, also modify this in
+  // the extension module, but it's quite verbose.  Note this will recusively apply to all subfields
+  // with matching key names and no "id" field available.
+  idMap: {
+    // UserType: 'key',
+  },
+
+  // The input and output fields can be sorted alphabetically (putting the ID field first)
+  sortFields: false,
+
+  sampleFieldValues: {
+    exact: {
+      // id: '28cc73ef-b9f2-4665-a8c8-869d4ddda13a',
+    },
+    startingWith: {},
+    endingWith: {
+      // 'phone': '+15555555555',
+      // 'amount': '100.00',
+      // 'email': 'j.doe@example.com',
+    },
+  },
+
+  testBundle: {
+    // authData: {
+    //   apiKey: process.env.API_KEY,
+    // },
+  }
+}
