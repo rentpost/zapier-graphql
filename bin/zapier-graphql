@@ -13,7 +13,7 @@ const {
   addTriggerQuery,
   addSearchQuery,
   updateConfiguredOperations,
-  createConfigFile,
+  createDefaultConfigFile,
   createMutationFile,
   createQueryFile,
   createAllOpreationFiles,
@@ -57,7 +57,7 @@ const validate = async () => {
       default: 'GRAPHQL_URL',
     }]);
 
-    await createConfigFile(answers.urlEnvVar);
+    await createDefaultConfigFile(answers.urlEnvVar);
   }
 }
 
