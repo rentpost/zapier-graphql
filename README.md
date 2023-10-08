@@ -2,6 +2,7 @@
 
 [![NPM Version](http://img.shields.io/npm/v/zapier-graphql.svg?style=flat)](https://www.npmjs.org/package/zapier-graphql)
 [![NPM Downloads](https://img.shields.io/npm/dm/zapier-graphql.svg?style=flat)](https://npmcharts.com/compare/zapier-graphql?minimal=true)
+![CI](https://github.com/rentpost/zapier-graphql/actions/workflows/node.js.yml/badge.svg)
 
 Zapier Platform CLI is primarily designed for REST APIs.  That does present some organizational questions when it comes to designing a Zapier CLI app.  Further, REST APIs are huge question marks, in general.  Whereas, GraphQL
 APIs all have an accessible typed schema.  This CLI app is designed to make use of a GraphQL API's schema for
