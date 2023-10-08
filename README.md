@@ -147,7 +147,7 @@ To assist with customizing extension modules, we provide some utility functions 
 
 Tests are also created when using the `scaffold` command and can be run using the `zapier test` command.
 
-From your `.zapiergraphql` config file, you can define the `testBundle` (Zapier's "bundle") used for tests.
+From your `.zapiergraphql` config file, you can define the `testBundle` (Zapier's "bundle") used for tests.  This is helpful for `authData`.  For action specific bundle `inputData`, you should modify the test file directly.
 
 ```js
 testBundle: {
@@ -156,6 +156,8 @@ testBundle: {
   },
 }
 ```
+
+*Test files and extension files are never updated after the intial scaffold.*
 
 ## Issues / Bugs / Questions
 
