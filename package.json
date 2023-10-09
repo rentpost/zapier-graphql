@@ -1,6 +1,6 @@
 {
   "name": "zapier-graphql",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "A GraphQL library that work's with Zapier CLI platform.",
   "type": "commonjs",
   "main": "./lib/index.js",
