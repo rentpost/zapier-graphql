@@ -124,7 +124,7 @@ addUserMutation.operation.sample.whateverField = 'Whatever';
 module.exports = addUserMutation;
 ```
 
-To assist with customizing extension modules, we provide some utility functions that can be imported from `zapier-graphql/utils`:
+To assist with customizing extension modules, we provide some utility functions that can be imported from `zapier-graphql/lib/utils`:
 
 - `addDynamicDropdowns(inputFields, triggerMapping)`
   - `inputFields` - An array of input field objects from the GraphQL operation module
@@ -135,7 +135,7 @@ To assist with customizing extension modules, we provide some utility functions 
 
   ```js Example
   const addUserMutation = require('../graphql/mutation/add-user');
-  const { addDynamicDropdowns } = require('zapier-graphql/utils');
+  const { addDynamicDropdowns } = require('zapier-graphql/lib/utils');
 
   addUserMutation.operation.inputFields = addDynamicDropdowns(addUserMutation.operation.inputFields, {
     country: 'countries.key.name',
