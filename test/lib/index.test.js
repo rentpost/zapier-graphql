@@ -5,9 +5,7 @@ const path = require('path');
 const {
   createDefaultConfigFile,
   setConfig,
-  createAllOpreationFiles,
-  createQueryFile,
-  createMutationFile,
+  createActionFile,
 } = require('../../lib');
 const Config = require('../../lib/Config');
 
@@ -54,22 +52,16 @@ describe('createConfigFile', () => {
 });
 
 
-describe('createAllOpreationFiles', () => {
-  it('should create all the GraphQL operations defined in the schema', async () => {
-    await createAllOpreationFiles();
+describe('createActionFile', () => {
+  it('should create the trigger query file', async () => {
+    await createActionFile('trigger', 'dragon');
   });
-});
 
-
-describe('createQueryFile', () => {
-  it('should create a GraphQL query file', async () => {
-    await createQueryFile('dragon');
+  it('should create the search query file', async () => {
+    await createActionFile('search', 'dragon');
   });
-});
 
-
-describe('createMutationFile', () => {
-  it('should create a GraphQL mutation file', async () => {
-    await createMutationFile('delete_users');
+  it('should create the create mutation file', async () => {
+    await createActionFile('create', 'delete_users');
   });
 });
