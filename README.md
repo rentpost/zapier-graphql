@@ -138,7 +138,7 @@ To assist with customizing extension modules, we provide some utility functions 
   const { addDynamicDropdowns } = require('zapier-graphql/lib/utils');
 
   addUserMutation.operation.inputFields = addDynamicDropdowns(addUserMutation.operation.inputFields, {
-    country: 'countries.key.name',
+    address__countryId: 'countries.id.name',
     typeKey: 'userTypes.key.name',
   });
   ```

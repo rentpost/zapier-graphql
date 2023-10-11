@@ -13,10 +13,8 @@ const {
   addTriggerQuery,
   addSearchQuery,
   updateConfiguredOperations,
+  createActionFile,
   createDefaultConfigFile,
-  createMutationFile,
-  createQueryFile,
-  createAllOpreationFiles,
   removeAllZapierFiles,
 } = require('zapier-graphql');
 
@@ -76,10 +74,9 @@ program.command('init')
 
 // Configure all the scaffold sub-commands
 const scaffold = program.command('scaffold')
-  .description(`Creates the necessary GraphQL operation file, Zapier extension file, test file, and
-updates the Zapier app index.js.  Similar to the "zapier scaffold" command, but for GraphQL operations.`);
+  .description(`Similar to the "zapier scaffold" command, but for GraphQL operations.`);
 
-scaffold.command('triggers')
+scaffold.command('trigger')
   .description('Scaffold a trigger query (must be a query).')
   .argument('<string>', 'The name of the GraphQL query (e.g. "contacts", "widget").')
   .action(async (queryName) => {
@@ -87,7 +84,7 @@ scaffold.command('triggers')
     await addTriggerQuery(queryName);
   });
 
-scaffold.command('creates')
+scaffold.command('create')
   .description('Scaffold a create mutation (must be a mutation).')
   .argument('<string>', 'The name of the GraphQL mutation (e.g. "addContact", "doSomething").')
   .action(async (mutationName) => {
@@ -95,7 +92,7 @@ scaffold.command('creates')
     await addCreateMutation(mutationName);
   });
 
-scaffold.command('searches')
+scaffold.command('search')
   .description('Scaffold a search query (must be a query and have input fields).')
   .argument('<string>', 'The name of the GraphQL query (e.g. "contacts", "user").')
   .action(async (queryName) => {
@@ -104,46 +101,44 @@ scaffold.command('searches')
   });
 
 // Configure the update command
-program.command('update')
-  .description('Updates the base operations files (./graphql/*) configured in your Zapier app index.js.')
+const update = program.command('update')
+  .description('Updates an action file for the GraphQL operation.');
+
+update.command('all')
+  .description('Updates all the configured action files.')
   .action(async () => {
     await validate();
     await updateConfiguredOperations();
   });
 
-// Creates or updates GraphQL operation files
-const create = program.command('create')
-  .description('Creates or updates a GraphQL operation file.');
-
-create.command('all')
-  .description('Creates or updates all the GraphQL operation files in your API schema.')
-  .action(async () => {
-    await validate();
-    await createAllOpreationFiles();
-  });
-
-create.command('query')
+update.command('trigger')
+  .description('Updates a trigger action file.')
   .argument('<string>', 'The name of the GraphQL query (e.g. "contacts", "user").')
   .action(async (queryName) => {
     await validate();
-    await createQueryFile(queryName);
+    await createActionFile('trigger', queryName);
   });
 
-create.command('mutation')
+update.command('create')
+  .description('Updates a create action file.')
   .argument('<string>', 'The name of the GraphQL mutation (e.g. "addContact", "doSomething").')
   .action(async (mutationName) => {
     await validate();
-    await createMutationFile(mutationName);
+    await createActionFile('create', mutationName);
   });
 
+update.command('search')
+  .description('Updates a search action file.')
+  .argument('<string>', 'The name of the GraphQL query (e.g. "contacts", "user").')
+  .action(async (queryName) => {
+    await validate();
+    await createActionFile('search', queryName);
+  });
 
 // Cleans up all the Zapier specific files, leaving only your `graphql` directory (query and mutation files)
 program.command('clean')
-  .description(`Cleans up all the Zapier specific files (creates, triggers, and searches - tests too),
-leaving only your "graphql" directory (query and mutation files).  This is basically a reset.  Do not
-run this command if you've customized your "extension" files, the ones in "creates", "triggers", or
-"searches".  Also don't run it if you have customized tests you want preserved (authentication.js test
-isn't touched).`)
+  .description(`Cleans up all the Zapier specific files (creates, triggers, and searches - tests too).
+Warning - this is basically a reset and a destructive operation.  Following this, you will need to update your app index.js accordingly.`)
   .action(async () => {
     const answers = await inquirer.prompt([{
       type: 'confirm',
