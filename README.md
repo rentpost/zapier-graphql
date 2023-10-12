@@ -16,7 +16,7 @@ At present, this lib will generate valid, tested and compliant modules ("actions
 zapier-graphql scaffold search contacts && zapier push
 ```
 
-That's it.  This will generate a new GraphQL module in your project at, `./searches/contacts.js`.  It will also generate a `./test/searches/contacts.js` test file for your new action.  Finally, the `zapier push` command will push the new action to your Zapier app.
+That's it.  This will generate a new GraphQL module in your project at, `./searches/contacts.js`.  It will also generate a `./test/searches/contacts.test.js` test file for your new action.  Finally, the `zapier push` command will push the new action to your Zapier app.
 
 ## Requirements
 
