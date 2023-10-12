@@ -1,5 +1,6 @@
 'use strict';
 
+const fs = require('fs');
 const path = require('path');
 
 const {
@@ -44,6 +45,8 @@ console.log = jest.fn();
 // Tests
 describe('createConfigFile', () => {
   it('should return the contents of our sample config with passed env variable', async () => {
+    jest.spyOn(fs, 'readFileSync').mockReturnValue(`{}`);
+
     const { file, contents } = await createDefaultConfigFile('TEST_ENV_VAR');
 
     expect(path.basename(file)).toEqual('.zapiergraphql');
