@@ -25,7 +25,7 @@ That's it.  This will generate a new GraphQL module in your project at, `./searc
 
 ## Installation
 
-This lib can be installed globally, or locally.  We recommend installing it locally, so you can make use of the `utils` module as well.
+This lib should be installed locally.  It will need to be packaged with your Zapier app.
 
 ```bash
 npm install --save zapier-graphql
@@ -55,8 +55,6 @@ Upon first use of the CLI app, you'll be prompted to create a `.zapiergraphql` c
 *This will also include the file in your `.zapierapprc` config as an `includeInBuild` item.*
 
 The config file that's created for you is a JavaScript module that exports an object - the config.  The config file has some documentation and includes all configurable directives.  See below for additional configuration details.
-
-The main config file for `zapier-graphql` provides a few different directives to improve the generated output code of your action files.
 
 - `request` - An object that configures the request.  Currently there are two properties:
   - `urlEnvVar` - An environment variable that includes the full base url of your GraphQL API.
