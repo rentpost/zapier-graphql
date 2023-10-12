@@ -10,13 +10,13 @@ automatic configuration of a Zapier CLI app.
 
 This lib started out as an experiment to simplify all the necessary boilerplate and maintenance required for a Zapier CLI app.  Virtually everything required to be "coded" was already defined in a GraphQL schema.  So, why not use the schema to generate the boilerplate code?  The experiment was a success and this lib was born.
 
-The goal of this lib is to be able to generate base GraphQL operation modules that can be extended and customized for use with your Zapier app.  At present, this lib will generate valid, tested and compliant modules ("actions") for your Zapier app.  In fact, you can run something like the following to add a new GraphQL operation as a live Zapier action:
+At present, this lib will generate valid, tested and compliant modules ("actions") for your Zapier app.  In fact, you can run something like the following to add a new GraphQL operation as a live Zapier action:
 
 ```bash
-zapier-graphql scaffold searches contacts && zapier push
+zapier-graphql scaffold search contacts && zapier push
 ```
 
-That's it.  This will generate a new GraphQL module in your project at, `./graphql/query/contacts.js`.  It will create an "extension module" within the standard [zapier-platform-cli](https://github.com/zapier/zapier-platform-cli) directrory, `./searches/contacts.js`.  It will import the extension module into your `index.js` entry file and register the new action with the `searches` export.  It will also generate a `./test/searches/contacts.js` test file for your new action.  Finally, the `zapier push` command will push the new action to your Zapier app.
+That's it.  This will generate a new GraphQL module in your project at, `./searches/contacts.js`.  It will also generate a `./test/searches/contacts.js` test file for your new action.  Finally, the `zapier push` command will push the new action to your Zapier app.
 
 ## Requirements
 
@@ -52,9 +52,11 @@ that of the `zapier` CLI command (see [Usage](#usage) above).
 
 Upon first use of the CLI app, you'll be prompted to create a `.zapiergraphql` config file.  This file is used to configure the CLI app and is required for use.  If you'd like to go ahead and generate one and configure it properly, just execute `zapier-graphql init`.
 
+*This will also include the file in your `.zapierapprc` config as an `includeInBuild` item.*
+
 The config file that's created for you is a JavaScript module that exports an object - the config.  The config file has some documentation and includes all configurable directives.  See below for additional configuration details.
 
-The main config file for `zapier-graphql` provides a few different directives to improve the generated output code of your base operation modules.
+The main config file for `zapier-graphql` provides a few different directives to improve the generated output code of your action files.
 
 - `request` - An object that configures the request.  Currently there are two properties:
   - `urlEnvVar` - An environment variable that includes the full base url of your GraphQL API.
@@ -118,7 +120,7 @@ testBundle: {
 }
 ```
 
-*Test files and extension files are never updated after the intial scaffold.*
+*Test files are never updated after the intial scaffold.*
 
 ## Issues / Bugs / Questions
 
