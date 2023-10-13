@@ -94,7 +94,7 @@ The config file that's created for you is a JavaScript module that exports an ob
     },
     startingWith: {
       'name_': 'John Doe', // Applies to something like `name_full` (Hopefully your API isn't that bad)
-    }
+    },
     endingWith: {
       'amount': '100.00', // Applies to `amount` or `totalAmount`
       'email': 'j.doe@example.com', // Would apply for `email` or `userEmail`
