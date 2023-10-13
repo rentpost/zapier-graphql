@@ -24,6 +24,7 @@
     "graphql": "^16.8.1",
     "inflection": "^3.0.0",
     "inquirer": "^8.2.6",
+    "json5": "^2.2.3",
     "undici": "5.14.0",
     "uuid": "^9.0.1",
     "zapier-platform-cli": "15.3.0",

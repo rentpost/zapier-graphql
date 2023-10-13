@@ -23,6 +23,9 @@ dependencies:
   inquirer:
     specifier: ^8.2.6
     version: 8.2.6
+  json5:
+    specifier: ^2.2.3
+    version: 2.2.3
   undici:
     specifier: 5.14.0
     version: 5.14.0
