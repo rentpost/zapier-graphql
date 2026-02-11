@@ -2,7 +2,6 @@
 
 SHELL:=/bin/bash
 
-.PHONY: help init install-vendors update-vendors test
 
 
 # Test that we have the necessary binaries available
@@ -15,6 +14,7 @@ test := $(call checkExecutables, pnpm jest)
 
 
 # Note that all comments with two hashes(#) will be used for output with `make help`. Alignment is tricky!
+.PHONY: help
 help:
 	@fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//'
 
@@ -23,17 +23,21 @@ help:
 ## This is a list of available make commands that can be run.
 ##
 
+.PHONY: init
 init:						   ## Initialize the project
 	@make install-vendors
 
 
+.PHONY: install-vendors
 install-vendors:               ## Install all dependencies using the lock file
 	@pnpm i
 
 
+.PHONY: update-vendors
 update-vendors:                ## Updates/upgrades all dependencies
 	@pnpm update
 
 
+.PHONY: test
 test:                          ## Runs all of the tests
 	@jest
