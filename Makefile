@@ -1,7 +1,6 @@
 #!/usr/bin/make -f
 
-SHELL:=/bin/bash
-
+SHELL := /bin/bash
 
 
 # Test that we have the necessary binaries available
@@ -18,26 +17,37 @@ test := $(call checkExecutables, pnpm jest)
 help:
 	@fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//'
 
+##
+## Zapier GraphQL — RentPost Zapier integration make targets. Run `make help` to list targets.
+##
 
 ##
-## This is a list of available make commands that can be run.
+## --- Setup ---------------------------------------------------------------
 ##
 
 .PHONY: init
-init:						   ## Initialize the project
+init:                  ## Initialize the project
 	@make install-vendors
 
 
+##
+## --- Dependencies --------------------------------------------------------
+##
+
 .PHONY: install-vendors
-install-vendors:               ## Install all dependencies using the lock file
+install-vendors:       ## Install all dependencies using the lock file
 	@pnpm i
 
 
 .PHONY: update-vendors
-update-vendors:                ## Updates/upgrades all dependencies
+update-vendors:        ## Updates/upgrades all dependencies
 	@pnpm update
 
 
+##
+## --- Testing -------------------------------------------------------------
+##
+
 .PHONY: test
-test:                          ## Runs all of the tests
+test:                  ## Runs all of the tests
 	@jest
