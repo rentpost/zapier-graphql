@@ -48,6 +48,13 @@ the decision was made to only "scaffold" the Zapier "action" files.
 As a result, the API for the `zapier-graphql` command and the overall functionality, is similar to
 that of the `zapier` CLI command (see [Usage](#usage) above).
 
+## Connections
+
+A query whose type is a connection (an object type with a `nodes` list field) is scaffolded on its
+node type: the output fields are selected inside `nodes { ... }`, the action returns the nodes, and
+the samples and output fields describe a node.  Paging arguments such as `first` and `after` become
+input fields like any other argument.
+
 ## Configuration
 
 Upon first use of the CLI app, you'll be prompted to create a `.zapiergraphql` config file.  This file is used to configure the CLI app and is required for use.  If you'd like to go ahead and generate one and configure it properly, just execute `zapier-graphql init`.
